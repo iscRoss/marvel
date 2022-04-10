@@ -1,0 +1,84 @@
+{%extends "base.html" %}
+{%load static %}
+{%block title%}<title>Marvel</title>
+<link rel="shortcut icon" href="{% static 'img/marvel.png'%}" type="image/vnd.microsoft.icon" />
+
+{%endblock title%}
+{%block Contenido%}
+<div class="alert alert-dark" role="alert">
+    <i class="fa fa-check btn-outline-success" aria-hidden="true"></i>
+
+    API-<a href="http://127.0.0.1:8000/users/" target="_blank">http://127.0.0.1:8000/users/</a>
+</div>
+<div class="row">
+    <div class="col">
+        <table class="table">
+            <thead>
+                <th>id</th>
+                <th>name</th>
+                <th>password encriptada</th>
+                <th>password</th>
+
+                <th>age</th>
+                <th>token</th>
+
+            </thead>
+            {%for u in users%}
+            <tr style="font-size:12px;">
+
+                <td>{{u.id}}</td>
+                <td>{{u.username}}</td>
+                <td>{{u.password}}</td>
+
+                <td>
+                    {% if user_atlas %}
+                    {%for a in user_atlas%}
+                        {%if u.id == a.id %}
+                            {{a.password}}
+                        {%endif%}
+                    {%endfor%}
+                {%endif%}
+                </td>
+                <td>
+
+                {% if user_atlas %}
+                    {%for a in user_atlas%}
+                        {%if u.id == a.id %}
+                            {{a.edad}}
+                        {%endif%}
+                    {%endfor%}
+                {%endif%}
+            </td>
+
+                {% if token %}
+                    {%for t in token%}
+                        {%if u.id == t.user_id %}
+                            <td>
+                            {{t.key}}
+                            </td>
+                        {%endif%}
+                    {%endfor%}
+                {%endif%}
+        </tr>
+            {%endfor%}
+        </table>
+    </div>
+    <div class="col">
+        <center><h3>Registrar usuario</h3></center>
+        <form method="POST" id="form_user">
+            {% csrf_token %} 
+
+            <label>Nombre de usuario</label>
+            <input class="form-control" name="usuario" id="usuario">
+            <label>Contraseña</label>
+            <input class="form-control"type="password" name="pass" id="pass">
+            <label>Edad</label>
+            <input class="form-control"type="number" name="edad" id="edad">
+            <br>
+            <button class="btn btn-primary" type="button" id="guardar_usuario">Registrar</button>
+        </form>
+
+    </div>
+</div>
+
+{%endblock Contenido%}

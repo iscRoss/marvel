@@ -1,0 +1,57 @@
+{%extends "base.html" %}
+{%load static %}
+{%block title%}<title>Marvel</title>
+<link rel="shortcut icon" href="{% static 'img/marvel.png'%}" type="image/vnd.microsoft.icon" />
+
+{%endblock title%}
+{%block Contenido%}
+<div class="alert alert-dark" role="alert">
+    <i class="fa fa-check btn-outline-success" aria-hidden="true"></i>
+
+    API-<a href="http://127.0.0.1:8000/addToLayaway/" target="_blank">http://127.0.0.1:8000/addToLayaway/</a>
+</div>
+<div class="row">
+    <div class="col-md-8">
+        {% if user.is_authenticated %}
+        <form id="form_comics">
+            <label>Buscar comics para agregar</label>
+            <input name="input_bucar" id="input_bucar" class="form-control">
+            <br>
+            <button type="button" class="btn btn-primary" id="btn-buscar">Buscar</button>
+        </form>
+        <div id="contenedor">
+        </div>
+        {% else %}
+        <h3>Debe logearse para poder buscar comics</h3>
+        {%endif%}
+    </div>
+    <div class="col-md-4">
+        {% if user.is_authenticated %}
+
+        <center><h3>Comics agregados a usuario</h3></center>
+        <table class="table">
+            <thead>
+                <th>id</th>
+                <th>title</th>
+                <th>image</th>
+                <th>onsaleDate</th>
+            </thead>
+            <tboby>
+                    {%if comic %}
+                        {% for c in comic %}
+                        <tr>
+                            <td>{{c.id}}</td>
+                            <td>{{c.title}}</td>
+                            <td><img src ="{{c.image}}" width="15%"></td>
+                            <td>{{c.onsaleDate}}</td>
+                        </tr>
+                        {%endfor%}
+                    {%endif%}
+            </tbody>
+        </table>
+        {%endif%}
+
+    </div>
+</div>
+
+{%endblock Contenido%}

@@ -1,0 +1,35 @@
+{%extends "base.html" %}
+{%load static %}
+{%block title%}<title>Marvel</title>
+<link rel="shortcut icon" href="{% static 'img/marvel.png'%}" type="image/vnd.microsoft.icon" />
+
+{%endblock title%}
+{%block Contenido%}
+<div class="row">
+    <div class="col-md-8 col-sm-12">
+        <div class="alert alert-dark" role="alert">
+            <i class="fa fa-check btn-outline-success" aria-hidden="true"></i>
+
+            API-<a href="http://127.0.0.1:8000/searchComic/" target="_blank">http://127.0.0.1:8000/searchComic/</a>
+        </div>
+        <div class="alert alert-dark" role="alert">
+            <i class="fa fa-check btn-outline-success" aria-hidden="true"></i>
+
+            API-<a href="http://127.0.0.1:8000/users/" target="_blank">http://127.0.0.1:8000/users/</a>
+        </div>
+        <div class="alert alert-dark" role="alert">
+            <i class="fa fa-check btn-outline-success" aria-hidden="true"></i>
+
+            API-<a href="http://127.0.0.1:8000/addToLayaway/" target="_blank">http://127.0.0.1:8000/addToLayaway/</a>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-12">
+        {% if user.is_authenticated %}
+        <tr><td>Name: </td><td>{{user.username}}</td></tr>
+        <tr><td >Token: </td><td style="font-size:7px;">{{token}}</td></tr>
+        {%endif%}
+    </div>
+
+</div>
+
+{%endblock Contenido%}

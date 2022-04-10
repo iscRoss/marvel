@@ -1,0 +1,104 @@
+{%extends "base.html" %}
+{%load static %}
+{%block title%}<title>Marvel</title>
+<link rel="shortcut icon" href="{% static 'img/marvel.png'%}" type="image/vnd.microsoft.icon" />
+
+{%endblock title%}
+{%block Contenido%}
+<div class="alert alert-dark" role="alert">
+    <i class="fa fa-check btn-outline-success" aria-hidden="true"></i>
+
+    API-<a href="http://127.0.0.1:8000/searchComic/" target="_blank">http://127.0.0.1:8000/searchComic/</a>
+</div>
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="pills-comics-tab" data-bs-toggle="pill" data-bs-target="#pills-comics" type="button" role="tab" aria-controls="pills-comics" aria-selected="true">Comics</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pills-personajes-tab" data-bs-toggle="pill" data-bs-target="#pills-personajes" type="button" role="tab" aria-controls="pills-personajes" aria-selected="false">Personajes</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pills-ambos-tab" data-bs-toggle="pill" data-bs-target="#pills-ambos" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Ambos</button>
+    </li>
+  </ul>
+<br>
+<div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+        <table class="table">
+            <thead>
+                <th>id</th>
+                <th>name</th>
+                <th>image</th>
+                <th>onsaleDate</th>
+            </thead>
+        <tr>
+        {%for comic in object_list%}
+            <td>{{comic.id}}</td>
+            <td>{{comic.name}}</td>
+            <td>{%if comic.image%}
+                <center><img src="{{comic.image}}" width="12%" ></center>
+                {%endif%}
+            </td>
+            <td>{{comic.onsaleDate}}</td>
+        </tr>
+        {%endfor%}
+        </table>
+    </div>
+    <div class="tab-pane fade" id="pills-personajes" role="tabpanel" aria-labelledby="pills-personajes-tab">
+        <table class="table">
+            <thead>
+                <th>id</th>
+                <th>name</th>
+                <th>image</th>
+                <th>appearances</th>
+            </thead>
+        <tr>
+        {%for pers in object_list_character%}
+            <td>{{pers.id}}</td>
+            <td>{{pers.name}}</td>
+            <td>{%if pers.image%}
+                <center><img src="{{pers.image}}" width="22%" ></center>
+                {%endif%}
+            </td>
+            <td>{{pers.appearances}}</td>
+        </tr>
+        {%endfor%}
+        </table>
+    </div>
+    <div class="tab-pane fade" id="pills-ambos" role="tabpanel" aria-labelledby="pills-ambos-tab">
+        <table class="table">
+            <thead>
+                <th>id</th>
+                <th>name</th>
+                <th>image</th>
+                <th>appearances/onsaleDate</th>
+            </thead>
+        <tr>
+        {%for pers in object_list_character%}
+            <td>{{pers.id}}</td>
+            <td>{{pers.name}}</td>
+            <td>{%if pers.image%}
+                <center><img src="{{pers.image}}" width="22%" ></center>
+                {%endif%}
+            </td>
+            <td>{{pers.appearances}}</td>
+        </tr>
+        {%endfor%}
+        <tr>
+        {%for comic in object_list%}
+            <td>{{comic.id}}</td>
+            <td>{{comic.name}}</td>
+            <td>{%if comic.image%}
+                <center><img src="{{comic.image}}" width="12%" ></center>
+                {%endif%}
+            </td>
+            <td>{{comic.onsaleDate}}</td>
+        </tr>
+        {%endfor%}
+        </table>
+    </div>
+  </div>
+
+
+
+{%endblock Contenido%}
